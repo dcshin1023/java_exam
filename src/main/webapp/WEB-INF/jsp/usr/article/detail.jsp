@@ -27,16 +27,14 @@
 				<th>작성일</th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach items="${articles }" var="article">
-				<tr>
-					<td>${article.getId() }</td>
-					<td>
-						<a href="/usr/article/detail?id=${article.getId() }">${article.getTitle() }</a>
-					</td>
-					<td>${article.getRegDate().substring(2, 16) }</td>
-				</tr>
-			</c:forEach>
+		<tbody>			
+			<tr>
+				<td>${article.getId() }</td>
+				<td>
+					<a href="/usr/article/detail?id=${article.getId() }">${article.getTitle() }</a>
+				</td>
+				<td>${article.getRegDate().substring(2, 16) }</td>
+			</tr>
 		</tbody>
 	</table>
 </body>
