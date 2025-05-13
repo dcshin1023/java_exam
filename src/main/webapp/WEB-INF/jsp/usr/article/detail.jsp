@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>목록</title>
+<title>상세보기</title>
 </head>
 <body>
-	<div>게시물 목록</div>
+	<div>상세보기</div>
 	
 	<div>
 		<div><a href="/">로고</a></div>
@@ -20,22 +20,26 @@
 	</div>
 	
 	<table border=1>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성일</th>
-			</tr>
-		</thead>
-		<tbody>			
-			<tr>
-				<td>${article.getId() }</td>
-				<td>
-					<a href="/usr/article/detail?id=${article.getId() }">${article.getTitle() }</a>
-				</td>
-				<td>${article.getRegDate().substring(2, 16) }</td>
-			</tr>
-		</tbody>
+		<tr>
+			<th>번호</th>
+			<td>${article.getId() }</td>
+		</tr>
+		<tr>
+			<th>작성일</th>
+			<td>${article.getRegDate().substring(2, 16) }</td>
+		</tr>
+		<tr>
+			<th>수정일</th>
+			<td>${article.getUpdateDate().substring(2, 16) }</td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td>${article.getTitle() }</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>${article.getContent() }</td>
+		</tr>
 	</table>
 </body>
 </html>
