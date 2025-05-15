@@ -12,9 +12,5 @@
 			<div>안녕하세요</div>
 		</div>
 	</section>
-	
-	<div>
-		<a href="test">작성하기</a>
-	</div>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
