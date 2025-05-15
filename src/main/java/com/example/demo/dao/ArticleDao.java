@@ -20,9 +20,8 @@ public interface ArticleDao {
 			        , title = #{title}
 			        , content = #{content}
 			""")
-	public int writeArticle(String title, String content);
-	
-	
+	public void writeArticle(String title, String content);
+
 	@Select("""
 			SELECT *
 				FROM article
@@ -35,7 +34,6 @@ public interface ArticleDao {
 				FROM article
 				WHERE id = #{id}
 			""")
-	
 	public Article getArticleById(int id);
 
 	@Update("""
@@ -58,4 +56,9 @@ public interface ArticleDao {
 				WHERE id = #{id}
 			""")
 	public void deleteArticle(int id);
+
+	@Select("""
+			SELECT LAST_INSERT_ID()
+			""")
+	public int getLastArticleId();
 }
