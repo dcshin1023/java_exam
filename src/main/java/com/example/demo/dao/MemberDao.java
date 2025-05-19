@@ -31,5 +31,5 @@ public interface MemberDao {
 				FROM `member`
 				WHERE loginID = #{loginId}
 			""")
-	Member matchMemberByLoginId(String loginId);
+	Member matchMemberByLoginId(String loginId, String loginPw);
 }

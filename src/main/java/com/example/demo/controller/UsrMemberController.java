@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,16 +27,6 @@ public class UsrMemberController {
 		return "usr/member/join";
 	}
 	
-	@GetMapping("/usr/member/login")
-	public String login(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		
-		String loginId = req.getParameter("loginId");
-		String loginPw = req.getParameter("loginPw");
-		
-		return "usr/member/login";
-	}
-	
 	@PostMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name) {
@@ -59,5 +47,40 @@ public class UsrMemberController {
 		}
 		
 		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 아이디입니다", loginId));
+	}
+	
+	@GetMapping("/usr/member/login")
+	public String login() {
+		return "usr/member/login";
+	}
+	
+	@PostMapping("/usr/member/doLogin")
+	@ResponseBody
+	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
+		
+		Member member = this.memberService.getMemberByLoginId(loginId);
+		
+		if (member == null) {
+			return Util.jsReplace(String.format("[ %s ] 은(는) 존재하지 않는 회원입니다", loginId), "login");
+		}
+		
+		if (member.getLoginPw().equals(loginPw) == false) {
+			return Util.jsReplace("비밀번호가 일치하지 않습니다", "login");
+		}
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("loginedMemberId", member.getId());
+		
+		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getLoginId()), "/");
+	}
+	
+	@GetMapping("/usr/member/logout")
+	@ResponseBody
+	public String logout(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		session.removeAttribute("loginedMemberId");
+		
+		return Util.jsReplace("정상적으로 로그아웃 되었습니다", "/");
 	}
 }
