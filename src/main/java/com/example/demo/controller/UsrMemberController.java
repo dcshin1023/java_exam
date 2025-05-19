@@ -12,6 +12,9 @@ import com.example.demo.dto.ResultData;
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Util;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UsrMemberController {
 	
@@ -24,6 +27,16 @@ public class UsrMemberController {
 	@GetMapping("/usr/member/join")
 	public String join() {
 		return "usr/member/join";
+	}
+	
+	@GetMapping("/usr/member/login")
+	public String login(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		
+		String loginId = req.getParameter("loginId");
+		String loginPw = req.getParameter("loginPw");
+		
+		return "usr/member/login";
 	}
 	
 	@PostMapping("/usr/member/doJoin")

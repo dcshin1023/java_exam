@@ -26,4 +26,10 @@ public interface MemberDao {
 			""")
 	Member getMemberByLoginId(String loginId);
 	
+	@Select("""
+			SELCT loginId, loginPw
+				FROM `member`
+				WHERE loginID = #{loginId}
+			""")
+	Member matchMemberByLoginId(String loginId);
 }
