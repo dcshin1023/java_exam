@@ -23,14 +23,16 @@
 		<div><a class="flex h-full px-3 items-center" href="/">로고</a></div>
 		<div class="grow"></div>
 		<ul class="flex">
-			<li><a class="flex h-full px-3 items-center hover:underline underline-offset-8" href="/">HOME</a></li>
-			<li><a class="flex h-full px-3 items-center hover:underline underline-offset-8" href="/usr/article/list">LIST</a></li>
-			<c:if test="${sessionScope.loginedMemberId == null }">
-				<li><a class="flex h-full px-3 items-center hover:underline underline-offset-8" href="/usr/member/join">JOIN</a></li>
-				<li><a class="flex h-full px-3 items-center hover:underline underline-offset-8" href="/usr/member/login">LOGIN</a></li>
+			<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/">HOME</a></li>
+			<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/article/list?boardId=1">NOTICE</a></li>
+			<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/article/list?boardId=2">FREE</a></li>
+			<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/article/list?boardId=3">QNA</a></li>
+			<c:if test="${req.getLoginedMemberId() == -1 }">
+				<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/member/join">JOIN</a></li>
+				<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/member/login">LOGIN</a></li>
 			</c:if>
-			<c:if test="${sessionScope.loginedMemberId != null }">
-				<li><a class="flex h-full px-3 items-center hover:underline underline-offset-8" href="/usr/member/logout">LOGOUT</a></li>
+			<c:if test="${req.getLoginedMemberId() != -1 }">
+				<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/member/logout">LOGOUT</a></li>
 			</c:if>
 		</ul>
 	</div>

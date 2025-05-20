@@ -12,6 +12,15 @@
 				<div class="table-box">
 					<table class="w-full">
 						<tr>
+							<select class="select w-200">
+							  <option disabled selected>게시판 종류</option>
+							  <option>공지사항</option>
+							  <option>자유게시판</option>
+							  <option>질문게시판</option>
+							</select>
+						<tr/>
+						<br>
+						<br />
 							<th>제목</th>
 							<td><input class="border w-full" name="title" type="text" /></td>
 						</tr>
