@@ -32,7 +32,7 @@
 				</table>
 			</div>
 			
-			<c:if test="${req.getLoginedMemberId() != -1 }">
+			<c:if test="${req.getLoginedMemberId() != -1 || req.getLoginedMemberId() != 0}">
 				<div class="bg-white p-6">
 					<div><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 				</div>

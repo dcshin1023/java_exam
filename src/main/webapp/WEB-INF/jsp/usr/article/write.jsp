@@ -10,33 +10,35 @@
 		<div class="container mx-auto">
 			<form action="doWrite" method="post">
 				<div class="table-box">
-					<table class="w-full">
+					<table class="table">
 						<tr>
-							<select class="select w-200">
-							  <option disabled selected>게시판 종류</option>
-							  <option>공지사항</option>
-							  <option>자유게시판</option>
-							  <option>질문게시판</option>
-							</select>
-						<tr/>
-						<br>
-						<br />
+							<th>분류</th>
+							<td>
+								<select class="select">
+								  <option disabled selected>게시판 선택</option>
+								  <option>공지사항</option>
+								  <option>자유게시판</option>
+								  <option>질문과 답변</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<th>제목</th>
-							<td><input class="border w-full" name="title" type="text" /></td>
+							<td><input class="input input-neutral" name="title" type="text" /></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea class="border w-full" name="content"></textarea></td>
+							<td><textarea class="textarea textarea-neutral" name="content"></textarea></td>
 						</tr>
 						<tr>
-							<td colspan="2"><button class="submitBtn w-32">저장</button></td>
+							<td colspan="2"><button class="btn btn-neutral btn-outline btn-sm btn-wide">저장</button></td>
 						</tr>
 					</table>
 				</div>
 			</form>
 			
-			<div class="mt-3 text-sm btns flex">
-				<div class="mr-2"><button onclick="history.back();">뒤로가기</button></div>
+			<div class="bg-white p-6">
+				<div><button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button></div>
 			</div>
 		</div>
 	</section>

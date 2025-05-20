@@ -34,9 +34,9 @@ public class UsrArticleController {
 	
 	@PostMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String content) {
+	public String doWrite(String title, String content, int boardId) {
 		
-		this.articleService.writeArticle(title, content, this.req.getLoginedMemberId());
+		this.articleService.writeArticle(title, content, this.req.getLoginedMemberId(), boardId);
 		
 		int id = this.articleService.getLastArticleId();
 		
