@@ -18,9 +18,9 @@ public interface ArticleDao {
 			    SET regDate = NOW()
 			        , updateDate = NOW()
 			        , memberId = #{loginedMemberId}
+			        , boardId = #{boardId}
 			        , title = #{title}
 			        , content = #{content}
-			        , boardId = #{boardId}
 			""")
 	public void writeArticle(String title, String content, int loginedMemberId, int boardId);
 
@@ -68,4 +68,10 @@ public interface ArticleDao {
 			SELECT LAST_INSERT_ID()
 			""")
 	public int getLastArticleId();
+	
+	@Select("""
+			SELECT COUNT(id)
+				FROM article
+			""")
+	public int getTotalCountArticle(int totalCountArticle);
 }

@@ -39,4 +39,8 @@ public class ArticleService {
 	public int getLastArticleId() {
 		return this.articleDao.getLastArticleId();
 	}
+	
+	public int getTotalCountArticle(int totalCountArticle) {
+		return this.articleDao.getTotalCountArticle(totalCountArticle);
+	}
 }

@@ -12,14 +12,24 @@
 				<div class="table-box">
 					<table class="table">
 						<tr>
-							<th>분류</th>
+							<th>게시판</th>
 							<td>
-								<select class="select">
-								  <option disabled selected>게시판 선택</option>
-								  <option>공지사항</option>
-								  <option>자유게시판</option>
-								  <option>질문과 답변</option>
-								</select>
+								<c:if test="${req.getLoginedMember().getAuthLevel() == 0 }">
+									<label>
+										<input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="1" />
+										공지사항
+									</label>
+									&nbsp;&nbsp;&nbsp;
+								</c:if>
+								<label>
+									<input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="2" checked />
+									자유
+								</label>
+								&nbsp;&nbsp;&nbsp;
+								<label>
+									<input class="radio radio-neutral radio-xs" name="boardId" type="radio" value="3" />
+									질문과 답변
+								</label>
 							</td>
 						</tr>
 						<tr>

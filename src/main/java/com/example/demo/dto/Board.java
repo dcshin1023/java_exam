@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Board {
 	private int id;
-	private String Name;
+	private String name;
 }
