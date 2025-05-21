@@ -20,8 +20,8 @@ public class ArticleService {
 		this.articleDao.writeArticle(title, content, loginedMemberId, boardId);
 	}
 
-	public List<Article> getArticles(int boardId) {
-		return this.articleDao.getArticles(boardId);
+	public List<Article> getArticles(int boardId, int articlesInPage, int limitFrom) {
+		return this.articleDao.getArticles(boardId, articlesInPage, limitFrom);
 	}
 
 	public Article getArticleById(int id) {
@@ -39,8 +39,8 @@ public class ArticleService {
 	public int getLastArticleId() {
 		return this.articleDao.getLastArticleId();
 	}
-	
-	public int getTotalCountArticle(int totalCountArticle) {
-		return this.articleDao.getTotalCountArticle(totalCountArticle);
+
+	public int getArticlesCnt(int boardId) {
+		return this.articleDao.getArticlesCnt(boardId);
 	}
 }

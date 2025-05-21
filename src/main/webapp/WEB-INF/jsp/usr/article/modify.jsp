@@ -13,17 +13,6 @@
 				<div class="table-box">
 					<table class="table">
 						<tr>
-							<th>분류</th>
-							<td>
-								<select class="select">
-								  <option disabled selected>게시판 선택</option>
-								  <option>공지사항</option>
-								  <option>자유게시판</option>
-								  <option>질문과 답변</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
 							<th>번호</th>
 							<td>${article.getId() }</td>
 						</tr>

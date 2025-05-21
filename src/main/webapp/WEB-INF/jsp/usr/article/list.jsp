@@ -8,7 +8,36 @@
 
 	<section class="mt-8">
 		<div class="container mx-auto">
-			<div>${board.getName() } 게시판</div>
+			<div class="ml-8 mb-2">
+				<div>
+					<span>${board.getName() } 게시판</span>
+					<div class="flex justify-end">
+						<select class="select">
+						  <option disabled selected>제목만</option>
+						  <option>제목</option>
+						  <option>내용</option>
+						  <option>제목 + 내용</option>
+						</select>
+						<label class="input">
+						  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						    <g
+						      stroke-linejoin="round"
+						      stroke-linecap="round"
+						      stroke-width="2.5"
+						      fill="none"
+						      stroke="currentColor"
+						    >
+						      <circle cx="11" cy="11" r="8"></circle>
+						      <path d="m21 21-4.3-4.3"></path>
+						    </g>
+						  </svg>
+						  <input type="search" required placeholder="Search" />
+						</label>
+						<button class="btn">검색</button>
+					</div>
+				</div>
+				<div><span>총 : ${articlesCnt }개</span></div>
+			</div>
 			<div class="table-box">
 				<table class="table">
 					<thead>
@@ -35,30 +64,36 @@
 			<c:if test="${req.getLoginedMember().getId() != 0 }">
 				<c:choose>
 					<c:when test="${req.getLoginedMember().getAuthLevel() == 0 }">
-						<div class="bg-white p-6">
-							<div>
-								<a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a>
-								<a class="join">페이지</a>
-							</div>
+						<div class="bg-white px-6 pt-6">
+							<div class="text-right"><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<c:if test="${board.getId() != 1 }">
-							<div class="bg-white p-6">
-								<div>
-									<a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기
-									</a>
-								</div>
+							<div class="bg-white px-6 pt-6"">
+								<div class="text-right"><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 							</div>
 						</c:if>
 					</c:otherwise>
 				</c:choose>
 			</c:if>
-			<div class="join flex justify-items-center">
-			  <button class="join-item btn">1</button>
-			  <button class="join-item btn">2</button>
-			  <button class="join-item btn">3</button>
-			  <button class="join-item btn">4</button>
+			
+			<div class="flex justify-center mb-8 mt-4">
+				<div class="join">
+					<c:set var="queryString" value="?boardId=${board.getId() }" />
+					
+					<c:if test="${begin != 1 }">
+						<a class="join-item btn btn-sm" href="${queryString }&cPage=1"><i class="fa-solid fa-angles-left"></i></a>
+						<a class="join-item btn btn-sm" href="${queryString }&cPage=${begin - 1 }"><i class="fa-solid fa-caret-left"></i></a>
+					</c:if>
+					<c:forEach begin="${begin }" end="${end }" var="i">
+						<a class="join-item btn-sm btn ${cPage == i ? 'btn-active' : '' }" href="${queryString }&cPage=${i }">${i }</a>
+					</c:forEach>
+					<c:if test="${end != totalPagesCnt }">
+						<a class="join-item btn btn-sm" href="${queryString }&cPage=${end + 1 }"><i class="fa-solid fa-caret-right"></i></a>
+						<a class="join-item btn btn-sm" href="${queryString }&cPage=${totalPagesCnt }"><i class="fa-solid fa-angles-right"></i></a>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</section>
