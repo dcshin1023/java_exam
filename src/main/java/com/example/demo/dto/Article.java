@@ -16,6 +16,6 @@ public class Article {
 	private String title;
 	private String content;
 	private String writerName;
-	private String searchType;
-	private String keyword;
+	private int likePoint;
+	private int views;
 }
