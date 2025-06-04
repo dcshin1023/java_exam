@@ -12,6 +12,7 @@ CREATE TABLE article(
 
 ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 ALTER TABLE article ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER memberId;
+ALTER TABLE article ADD COLUMN views INT UNSIGNED NOT NULL DEFAULT 0;
 
 CREATE TABLE `member`(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
@@ -27,6 +28,22 @@ ALTER TABLE `member` ADD COLUMN authLevel INT UNSIGNED NOT NULL DEFAULT 1 COMMEN
 CREATE TABLE board(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
     , `name` VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE likePoint(
+    memberId INT UNSIGNED NOT NULL
+    , relTypeCode VARCHAR(20) NOT NULL
+    , relId INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE reply(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+    , regDate DATETIME NOT NULL
+    , updateDate DATETIME NOT NULL
+    , memberId INT UNSIGNED NOT NULL
+    , relTypeCode VARCHAR(20) NOT NULL
+    , relId INT UNSIGNED NOT NULL
+    , content VARCHAR(500) NOT NULL
 );
 
 INSERT INTO article
@@ -57,7 +74,7 @@ INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()
         , loginId = 'admin'
-        , loginPw = 'admin'
+        , loginPw = SHA2('admin', 256)
         , `name` = '관리자'
         , authLevel = 0;
         
@@ -65,14 +82,14 @@ INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()
         , loginId = 'test1'
-        , loginPw = 'test1'
+        , loginPw = SHA2('test1', 256)
         , `name` = '유저1';
 
 INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()
         , loginId = 'test2'
-        , loginPw = 'test2'
+        , loginPw = SHA2('test2', 256)
         , `name` = '유저2';
         
 INSERT INTO board
@@ -84,6 +101,58 @@ INSERT INTO board
 INSERT INTO board
     SET `name` = '질문과 답변';
 
+INSERT INTO likePoint
+    SET memberId = 2
+        , relTypeCode = 'article'
+        , relId = 2;
+
+INSERT INTO likePoint
+    SET memberId = 3
+        , relTypeCode = 'article'
+        , relId = 2;
+        
+INSERT INTO likePoint
+    SET memberId = 2
+        , relTypeCode = 'article'
+        , relId = 3;
+        
+INSERT INTO likePoint
+    SET memberId = 3
+        , relTypeCode = 'article'
+        , relId = 1;
+
+INSERT INTO reply
+    SET regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 2
+        , relTypeCode = 'article'
+        , relId = 2
+        , content = '댓글내용1';
+
+INSERT INTO reply
+    SET regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 2
+        , relTypeCode = 'article'
+        , relId = 2
+        , content = '댓글내용2';
+        
+INSERT INTO reply
+    SET regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 3
+        , relTypeCode = 'article'
+        , relId = 2
+        , content = '댓글내용3';
+
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
+SELECT * FROM likePoint;
+SELECT * FROM reply;
+
+/* 
+페이징 테스트용 더미데이터
+insert into article (regDate, updateDate, memberId, boardId, title, content)
+select now(), now(), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 3) + 1, concat('테스트제목', substr(RAND(), 1, 5)), CONCAT('테스트내용', SUBSTR(RAND(), 1, 5)) from article;
+*/
